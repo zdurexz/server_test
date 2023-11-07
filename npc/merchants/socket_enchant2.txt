@@ -1,0 +1,476 @@
+//===== rAthena Script ======================================= 
+//= Episode 12 Socket Enchant NPC
+//===== By: ================================================== 
+//= Gepard
+//===== Current Version: ===================================== 
+//= 1.1a
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Adds slots to selected weapons and armor.
+//===== Additional Comments: ================================= 
+//= 1.0 First version.
+//= 1.1 Duplicates now spawn from floating NPCs. [L0ne_W0lf]
+//= 1.1a Added 'disable_items' command. [Euphy]
+//============================================================ 
+
+-	script	Leablem#dummy::SocketEnchant2	-1,{
+	if (checkweight(1201,1) == 0)
+	{
+		mes "- �͡�͹ !! -";
+		mes "- �����Ңͧ��� -";
+		mes "- �բͧ�ҡ�Թ�. -";
+		mes "- ���ô�ͧ -";
+		mes "- Ŵ�ӹǹ�ͧŧ��͹. -";
+		close;
+	}
+	mes "[Leablem]";
+	mes "��Ѵ��. ��Ҫ������ Leablem,";
+	mes "��Т���繪�ҧ෤�Ԥ㹡��";
+	mes "��������ظ�������.";
+	mes "�ѹ�Ҩ�д��ҡ, ���Ҫͺ���ѹ���";
+	mes "��Ҥ�͹��ҧ�������ͧ��������.";
+	next;
+	mes "[Leablem]";
+	mes "��������¹����Ըշ��Ҩҡ����¢��, Seyablem,";
+	mes "���ҤԴ��Ң�ҵ�ͧ�֡���������.";
+	mes "���Ф������ͧ��Ҷ֧�ҧ�ѹ,";
+	mes "���˵���������ͺ����¢�� Seyablem.";
+	next;
+	mes "[Leablem]";
+	mes "����¢�����ͺ���ҷ���͹���";
+	mes "������ҡѧ������ǡѺ�ѡ�Тͧ���";
+	mes "�ѹ���վ�. ��ҤԴẺ���, ���ҧ�á���, ����繤�����ʹ������";
+	mes "����͹����ҡ�ʹ�.";
+	next;
+	mes "[Leablem]";
+	mes "�ͺ�س��Ҩ�ԧ�, ��������������¹���.";
+	mes "������������㨹ѡ";
+	mes "���з���觷��ᵡ��ҧ,";
+	mes "����ѧ�ҡ��������ͧ�Ӵ�";
+	mes "�͹����ѹ�����������ö���ѹ��.";
+	next;
+	mes "[Leablem]";
+	mes "����ԧ����";
+	mes "����¢�������ҡ����ҷ�.";
+	mes "��������ҡ�����������, �ѧ�������...��Ҩ֧�������úҧ���ҧ�.";
+	mes "��觢�Һ͡�����!";
+	next;
+	mes "[Leablem]";
+	mes "�������բͧ������";
+	mes "�����ҡ���ͧ��������ٴ� ?";
+	mes "��Һ�ԡ�âͧ���, �������,";
+	mes "����͡�ʷ������";
+	mes "�Ѻ�������ҹ�鹾�.";
+	next;
+	switch(select("���ظ:����:����ǡѺ��觷������:��������´�������:�͡"))
+	{
+		case 1:
+			mes "[Leablem]";
+			mes "���ظ, ��� ? ��, ����ջѭ��.";
+			mes "���ظ���͡�� 4 ����";
+			mes "��������ҡ����.";
+			mes "C class �����ش, ��� S class �ҡ�ش.";
+			mes "�����˹�����ҵ�ͧ��÷� ?";
+			next;
+			switch(select("C:B:A:S"))
+			{
+				case 1:
+					mes "[Leablem]";
+					mes "C class, ������.";
+					mes "���ظ���÷��������� ?";
+					next;
+					switch(select("Book of Mother Earth:Book of Billows:Book of Gust of Wind:Book of the Blazing Sun"))
+					{
+						case 1: callfunc "Func_Socket2",1554,1569,40,66,200,1010,10;
+						case 2: callfunc "Func_Socket2",1553,1568,40,66,200,1010,10;
+						case 3: callfunc "Func_Socket2",1556,1571,40,66,200,1010,10;
+						case 4: callfunc "Func_Socket2",1555,1570,40,66,200,1010,10;
+					}
+				case 2:
+					mes "[Leablem]";
+					mes "������͡ B class.";
+					mes "���, ���ظ���÷��������� ?";
+					next;
+					switch(select("Orcish Axe:Scimiter:Spike"))
+					{
+						case 1: callfunc "Func_Socket2",1304,1309,40,66,200,984,1;
+						case 2: callfunc "Func_Socket2",1113,1114,40,66,200,984,1;
+						case 3: callfunc "Func_Socket2",1523,1538,40,61,300,984,1;
+					}
+				case 3:
+					mes "[Leablem]";
+					mes "A class? �����㨹��. �����, ����ջѭ��.";
+					mes "���, ���ظ���÷��������� ?";
+					next;
+					switch(select("Dragon Killer:Katar of Quaking:Katar of Raging Blaze:Katar of Frozen Icicle:Katar of Piercing Wind:Golden Mace:Oriental Lute:Queen's Whip:Spectral Spear:Gae Bolg:Schweizersabel"))
+					{
+						case 1:  callfunc "Func_Socket2",13001,13030,40,61,500,984,2;
+						case 2:  callfunc "Func_Socket2", 1257, 1276,40,66,500,984,2;
+						case 3:  callfunc "Func_Socket2", 1258, 1277,40,66,500,984,2;
+						case 4:  callfunc "Func_Socket2", 1256, 1275,40,66,500,984,2;
+						case 5:  callfunc "Func_Socket2", 1259, 1278,40,66,500,984,2;
+						case 6:  callfunc "Func_Socket2", 1524, 1539,40,61,500,984,2;
+						case 7:  callfunc "Func_Socket2", 1918, 1922,40,61,500,984,2;
+						case 8:  callfunc "Func_Socket2", 1970, 1976,40,61,500,984,2;
+						case 9:  callfunc "Func_Socket2", 1477, 1479,40,56,500,984,2;
+						case 10: callfunc "Func_Socket2", 1474, 1480,40,56,500,984,2;
+						case 11: callfunc "Func_Socket2", 1167, 1178,40,61,500,984,2;
+					}
+				case 4:
+					mes "[Leablem]";
+					mes "����, S Class?! �����Ҩ�ԧ�� ?*�֡�ѡ*";
+					mes "���...���ظ S class ����˹�����ҵ�ͧ��è������ ?!";
+					next;
+					switch(select("Zephyrus:Mailbreaker:Dragon Slayer:Swordbreaker:Assasin Dagger:Grand Cross:Executioner"))
+					{
+						case 1: callfunc "Func_Socket2",1468, 1481,40,51,1000,984,5,999,10;
+						case 2: callfunc "Func_Socket2",1225,13032,40,51,1000,984,5,999,10;
+						case 3: callfunc "Func_Socket2",1166, 1180,40,51,1000,984,5,999,10;
+						case 4: callfunc "Func_Socket2",1224,13031,40,51,1000,984,5,999,10;
+						case 5: callfunc "Func_Socket2",1232,13033,40,51,1000,984,5,999,10;
+						case 6: callfunc "Func_Socket2",1528, 1540,40,51,1000,984,5,999,10;
+						case 7: callfunc "Func_Socket2",1169, 1179,40,51,1000,984,5,999,10;
+					}
+			}
+		case 2:
+			mes "[Leablem]";
+			mes "����, ��� ? ��, ����ջѭ��.";
+			mes "�������͡�� 4 ����";
+			mes "��������ҡ����.";
+			mes "C class �����ش, ��� S class �ҡ�ش.";
+			mes "�����˹�����ҵ�ͧ��÷� ?";
+			next;
+			switch(select("C:B:A:S"))
+			{
+				case 1:
+					mes "[Leablem]";
+					mes "C class, ������.";
+					mes "�������÷��������� ?";
+					next;
+					switch(select("Sunflower:Ph.D Hat:Big Ribbon:Boys Cap"))
+					{
+						case 1: callfunc "Func_Socket2",2253,5351,40,66,100,999,3;
+						case 2: callfunc "Func_Socket2",5012,5347,40,66,100,999,3;
+						case 3: callfunc "Func_Socket2",2244,5348,40,66,100,999,5;
+						case 4: callfunc "Func_Socket2",5016,5349,40,66,100,999,5;
+					}
+				case 2:
+					mes "[Leablem]";
+					mes "������͡ B class.";
+					mes "���, �������÷��������� ?";
+					next;
+					switch(select("Skull Ring:High Heels"))
+					{
+						case 1: callfunc "Func_Socket2",2609,2715,40,61,300,999,5;
+						case 2: callfunc "Func_Socket2",2409,2432,40,61,300,999,5;
+					}
+				case 3:
+					mes "[Leablem]";
+					mes "A class? �����㨹��. �����, ����ջѭ��.";
+					mes "���, �������÷��������� ?";
+					next;
+					switch(select("Pirate Bandana:Black Leather Boots"))
+					{
+						case 1: callfunc "Func_Socket2",2287,5350,50,61,500,985,1; // 50,61 - it's not a typo
+						case 2: callfunc "Func_Socket2",2425,2434,40,51,500,985,1;
+						//case 3: callfunc "Func_Socket2",15053,15056,x,x,x,x,x;	// Special Ninja Suit (Needs more info)
+					}
+				case 4:
+					mes "[Leablem]";
+					mes "����, S Class?! �����Ҩ�ԧ�� ?*�֡�ѡ*";
+					mes "���...���� S class ����˹�����ҵ�ͧ��è������ ?!";
+					next;
+					switch(select("Mage Coat:Holy Robe:Sacred Mission:Undershirt:Pantie"))
+					{
+						case 1: callfunc "Func_Socket2",2334,2372,40,51,1000,985,1; // Mage Coat has 10% success chance
+						case 2: callfunc "Func_Socket2",2327,2373,45,51,1000,985,1; // the rest has 5%
+						case 3: callfunc "Func_Socket2",2111,2128,45,51,1000,985,1;
+						case 4: callfunc "Func_Socket2",2522,2523,45,51,1000,985,1;
+						case 5: callfunc "Func_Socket2",2339,2371,45,51,1000,985,1;
+					}
+			}
+		case 3:
+			mes "[Leablem]";
+			mes "���, �ѹ�������������͡, ����ҤԴ���";
+			mes "�ѹ�Ҩ������餹ᵡ�����. ";
+			mes "��������ҡ������¢�������,";
+			mes "�ѧ�����������ѹ����.";
+			next;
+			mes "[Leablem]";
+			mes "...�ѹ�բͧ�������˹�觷�����͡�ʷ�������٧�ҡ�,";
+			mes "����š�ҡѺ�����Ф������·���٧���ѹ. ";
+			mes "���ʧ�����Ҩ��������ԡ�ù��ѹ";
+			mes "��Ң���Դ����.";
+			next;
+			mes "[Leablem]";
+			mes "...������...";
+			next;
+			mes "[Leablem]";
+			mes ".............";
+			next;
+			mes "[Leablem]";
+			mes ".............";
+			next;
+			mes "[Leablem]";
+			mes "��Ҵ�����͹��ʹ㨹��.";
+			mes "��������ҡ, ����Ҩ�͡��ҡ���. ";
+			mes "����ҵ�ͧ�ѭ�ҡ�͹��Ҩ����繤����Ѻ.";
+			mes "��Ҿ���¢�������Ң�Һ͡���,";
+			mes "��ҵ�ͧ��Ң�����!";
+			next;
+			mes "[Leablem]";
+			mes "����繺�ԡ�þ���ɷ���͡��������٧�֧ 90%,";
+			mes "���ͧ��� 2 Gold ��� 2 ������ҹ zeny:";
+			mes "��Ҩ������ Hat of the Sun God ���.";
+			next;
+			mes "[Leablem]";
+			mes "����¢�Һ͡���, ����¡�͹, ����������Ѵ�ŧ��ǡ㺹��. ";
+			mes "���������������������ҡ�����";
+			mes "���ͧ, ��੾�����ҧ���������ѹ����觵�ͧ����.";
+			mes "��������ҡ������¢�����. ��觷���ҡ��ѧ��.";
+			next;
+			switch(select("���ԡ��","�͡"))
+			{
+				case 1:
+					mes "[Leablem]";
+					mes ".................";
+					next;
+					mes "[Leablem]";
+					mes ".................";
+					next;
+					mes "[Leablem]";
+					mes "...��... ���ù� ? ����!";
+					mes "������繤���";
+					mes "�ѹ��������!";
+					mes "����, ��Һ͡������! ��� �������! ����!";
+					next;
+					mes "[Leablem]";
+					mes "���, �������Ҩ! ���!";
+					next;
+					mes "[Leablem]";
+					mes "��ҷ������...";
+					next;
+					mes "[Leablem]";
+					mes "��ҷ����... ��...";
+					next;
+					mes "[Leablem]";
+					mes ".................";
+					next;
+					mes "[Leablem]";
+					mes "�����...";
+					next;
+					mes "[Leablem]";
+					mes "��Ҵ�����. Okay, ��Ҩзӵ�������Ҵ��ѧ�ͧ���.";
+					mes "����仺͡��,";
+					mes "��੾�о���¢��. �ѭ���� ?";
+					next;
+					mes "[Leablem]";
+					mes "Okay ���, ��ҵ�ͧ��";
+					mes "^FF00002 Gold, 2 ������ҹ zeny -- �繤�Һ�ԡ�� --,";
+					mes "^FF0000�����ǡ Hat of the Sun God.";
+					mes "^FF0000�������������͡������������� 90%, ��Һ͡��ѧ ?^000000";
+					mes "�ǡ��Ҥ������ҡ����������ҡ���ҹ������,";
+					mes "������������áԨ�ѹ���.";
+					next;
+					if ((Zeny > 199999999) && (countitem(969) > 1) && (countitem(5022) > 0))
+					{
+						mes "[Leablem]";
+						mes "����й� ?";
+						mes "���������������ҧ���.";
+						next;
+						set .@a, rand(1,100);
+						if ((.@a > 4) && (.@a < 95))
+						{
+							specialeffect EF_LORD;
+							mes "[Leablem]";
+							mes "�ʹ������! ����, ���������͡������� 90% ����觷��١��ͧ!";
+							mes "����, �繡������ٷ������࿡���ԧ�.";
+							mes "��������ҧ�����.";
+							delitem 5022,1; //Helm_Of_Sun
+							delitem 969,2; //Gold
+							set Zeny, Zeny - 200000000;
+							getitem 5353,1; //Helm_Of_Sun_
+							next;
+							mes "[Leablem]";
+							mes "�����繤����á��Ф����ش���·���Ҩз�������.";
+							mes "��������仺͡�����";
+							mes "�Ѻ��觷���Դ���. Okay?";
+							close;
+						}
+						else
+						{
+							specialeffect EF_SUI_EXPLOSION;
+							mes "[Leablem]";
+							mes "��ҡ�! �����Ҫ��¡���·ʹ, �ѹ�������!";
+							mes "��ҤԴ������дǧ����ҡ���Ҵǧ��...";
+							mes "��Ҥ�÷����ҧ�ô�? ...������";
+							mes "��������ҡ�з��ѹ���!";
+							delitem 5022,1; //Helm_Of_Sun
+							delitem 969,2; //Gold
+							set Zeny, Zeny - 200000000;
+							next;
+							mes "[Leablem]";
+							mes "����, �����ͧ��Ҵ�����µ�Ẻ���!";
+							mes "����~";
+							close;
+						}
+					}
+					else
+					{
+						mes "[Leablem]";
+						mes "�����...";
+						next;
+						mes "[Leablem]";
+						mes "����բͧ���ú.";
+						mes "Ẻ��������� ?";
+						mes "�����Ңͧ��͹���Ǥ��¡�Ѻ������,";
+						mes "���������բͧ�ú. ����~";
+						close;
+					}
+				case 2:
+					mes "[Leablem]";
+					mes "����仺͡��";
+					mes "�Ѻ����ͧ����Һ͡�Ѻ���. Okay?";
+					close;
+			}
+		case 4:
+			mes "[Leablem]";
+			mes "�����ҡ��Һ��������´������� ?";
+			mes "������, ������Դ���";
+			mes "�ѹ���������繾������͡.";
+			mes "���Ҩк͡����ͧ.";
+			next;
+			mes "[Leablem]";
+			mes "��ҧ�����㹺ҧ���ͧ";
+			mes "�Ҩ�������������ҡ��觢��";
+			mes "��Ңͧ�������ա���Ѿ�ô.";
+			mes "�������������ѹ������ͧ��ԧ��������,";
+			mes "���ҡ�ͨ���������ҧ.";
+			next;
+			mes "[Leablem]";
+			mes "���ҧ��, ��ҧ��������ͧ˹��";
+			mes "���͡������������";
+			mes "��Ңͧ�������ա���Ѿ�ô����٧,";
+			mes "��ǹ��ҧ����ٷ�����";
+			mes "�͡�������������Ҩ�������Ѻ�ͧ�Ѿ�ô�����.";
+			next;
+			mes "[Leablem]";
+			mes "������ѹ�������, �ͧ��������";
+			mes "��ᵡ�������.";
+			mes "��Ҩо����������������������ѹᵡ, ��";
+			mes "���������繧ҹ��������´��͹.";
+			next;
+			mes "[Leablem]";
+			mes "���, ������Ӥѭ����ͧ�͡���.";
+			mes "^FF0000���ҹӢͧ�������͹�ѹ��㹡����Ңͧ���";
+			mes "^FF0000�����������������.";
+			mes "^FF0000O�ѹ����������٢ͧ㹡����Ңͧ���,";
+			mes "^FF0000�����������ѹ�Դ��Ҵ, ��Ҥ�ùӢͧ����������.^000000";
+			next;
+			mes "[Leablem]";
+			mes "�����ѧ�����Ҩ����Ѻ����ª��ҡ��觷���Һ͡���.";
+			mes "���.";
+			close;
+		case 5:
+			mes "[Leablem]";
+			mes "���.";
+			close;
+	}
+}
+
+payon,236,199,3	duplicate(SocketEnchant2)	Leablem#pay	86
+lighthalzen,96,137,3	duplicate(SocketEnchant2)	Leablem#lhz	86
+prt_in,22,60,6	duplicate(SocketEnchant2)	Leablem#prt	86
+
+function	script	Func_Socket2	{
+	.@item_id = getarg(0);
+	.@zeny_req = getarg(4);
+	setarray .@item_req[0], getarg(5), getarg(7,0);
+	setarray .@req_amount[0], getarg(6), getarg(8,0);
+
+	disable_items;
+	mes "[Leablem]";
+	if (.@item_req[1] != 0 && .@req_amount[1] != 0)
+	{
+		mes getitemname(.@item_id) +"... Okay, ��ҵ�ͧ��";
+		mes "^FF0000"+ (.@zeny_req >= 1000 ? (.@zeny_req /1000 +",000") : .@zeny_req) +",000 zeny �繤�Һ�ԡ��,";
+		mes "^FF0000"+ .@req_amount[0] +"ea "+ getitemname(.@item_req[0]) +" and "+ .@req_amount[1] +"ea "+ getitemname(.@item_req[1]) +".";
+		mes "^FF0000��ҵ�ͧ�� "+ getitemname(.@item_id) +".^000000";
+	}
+	else
+	{
+		mes getitemname(.@item_id) +"? Okay, ��ҵ�ͧ��";
+		mes "^FF0000"+ (.@zeny_req >= 1000 ? (.@zeny_req/1000 +",000") : .@zeny_req) +",000 zeny �繤�Һ�ԡ����� "+ .@req_amount[0] +" "+ getitemname(.@item_req[0]) + (.@req_amount[0] > 1 && .@item_req[0] != 999 ? "s":"") +" ����.";
+		mes "^FF0000��ҵ�ͧ������ "+ getitemname(.@item_id) +".";
+		mes "^FF0000��ҵ�ͧ�բͧ���ú���.^000000";
+	}
+	next;
+	mes "[Leablem]";
+	mes "Did you already bring all of them?";
+	mes "For your information, if you fail to create a slot,";
+	mes "you will lose all the item requirement as well as the target "+ ((getiteminfo(.@item_id, ITEMINFO_LOCATIONS)&EQP_HAND_R) ? "weapon" : "armor") +".";
+	mes "Also remember, if the "+ ((getiteminfo(.@item_id, ITEMINFO_LOCATIONS)&EQP_HAND_R) ? "weapon" : "armor") +" has been upgraded, and has been inserted with a card,";
+	mes "you will lose them even if you succeed in creating a slot.";
+	next;
+	switch(select("��������.:����͡��˹��."))
+	{
+		case 1:
+			if ((Zeny >= .@zeny_req*1000) && countitem(.@item_req[0]) >= .@req_amount[0] && countitem(getarg(7,512)) >= .@req_amount[1] && countitem(.@item_id) > 0)// if there's no .@req_amount[0] and .@req_amount[1] provided, check itemcount against 0 (we still need a valid item ID though)
+			{
+				mes "[Leablem]";
+				mes "�����, ��������ҹ�ѹ!";
+				mes "��Ҩ���ǹ��������稡�����.";
+				next;
+				set .@a, rand(1,100);
+				if ((.@a > getarg(2)) && (.@a < getarg(3)))
+				{
+					specialeffect EF_LORD;
+					mes "[Leablem]";
+					mes "������, �ѹ�����.";
+					mes "�ѹ���ش�ʹ�ҡ�!";
+					delitem .@item_id,1;
+					delitem .@item_req[0],.@req_amount[0];
+					if (.@item_req[1] != 0 && .@req_amount[1] != 0)
+						delitem .@item_req[1],.@req_amount[1];
+					Zeny = Zeny - .@zeny_req *1000;
+					getitem getarg(1),1;
+					next;
+					mes "[Leablem]";
+					mes "�����͡ѹ����, ������!";
+					close;
+				}
+				else
+				{
+					specialeffect EF_SUI_EXPLOSION;
+					mes "[Leablem]";
+					mes "����! ...��Ң���, �ѹ�������.";
+					mes "���ҧ�á���, �������ѹ��������.";
+					mes "��������ѹ�����⪤�ͧ, ������������ ?";
+					mes "�������������.";
+					mes "�ͧ�������˹��.";
+					delitem .@item_id,1;
+					delitem .@item_req[0],.@req_amount[0];
+					if (.@item_req[1] != 0 && .@req_amount[1] != 0)
+						delitem .@item_req[1],.@req_amount[1];
+					Zeny = Zeny - .@zeny_req *1000;
+					next;
+					mes "[Leablem]";
+					mes "�����͡ѹ����, ������!";
+					close;
+				}
+			}
+			else
+			{
+				mes "[Leablem]";
+				mes "����բͧ���ú!";
+				mes "���������ú!";
+				close;
+			}
+		case 2:
+			mes "[Leablem]";
+			mes "���Ǿ��ѹ����.";
+			close;
+	}
+}

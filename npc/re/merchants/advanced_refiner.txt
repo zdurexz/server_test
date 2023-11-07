@@ -1,0 +1,206 @@
+//===== rAthena Script =======================================
+//= Advanced Refiner
+//===== Description: =========================================
+//= [Official Conversion]
+//= Refiner that uses Enriched ores to increase upgrade success.
+//===== Changelog: ===========================================
+//= 1.0 Added Malangdo Refiner "Holink". [Euphy]
+//= 1.1 Removed re-roll behavior. [Secret]
+//= 1.2 Added db-based material ID [Secret]
+//============================================================
+
+// Main NPC :: mal_jerun
+//============================================================
+malangdo,221,174,6	script	Holink#mal_cash	559,{
+	disable_items;
+	mes "[Holink]";
+	mes "������ ��Ҥ�ͪ�ҧ�պǡ Holink~";
+	mes "���Ҩ������觡�õպǡ, Holink~";
+	mes "�������Ǿ���ɷ����������¹�ҡ Morroc, Holink~";
+	mes "�١��Ǣͧ����繤�������Ҥ������ҡ, Holink~";
+	mes "��Ҩеպǡ������ѹ��� ? Holink~";
+	next;
+
+	setarray .@indices[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
+	for (set .@i,1; .@i<=10; set .@i,.@i+1)
+		set .@menu$, .@menu$ + ( getequipisequiped(.@indices[.@i]) ? getequipname(.@indices[.@i]) : F_getpositionname(.@indices[.@i]) +"-[Empty]" ) +":";
+	set .@part, .@indices[ select(.@menu$) ];
+
+	if (!getequipisequiped(.@part)) {
+		mes "[Holink]";
+		switch(.@part) {
+		case EQI_HEAD_TOP:
+			mes "������ �Ҩ����ͧ��� Aragam �º͡���~";
+			mes "��������ѡ������Ѻ�ä��...";
+			break;
+		case EQI_ARMOR:
+			mes "���������������, ������!!";
+			break;
+		case EQI_HAND_L:
+			mes "������? ��ҵ�ͧ�������ҷ����áѺ��ͫ���...?";
+			break;
+		case EQI_HAND_R:
+			mes "������? ��ҵ�ͧ�������ҷ����áѺ��͢��...?";
+			break;
+		case EQI_GARMENT:
+			mes "������? ����ҵ�����ҹ�.";
+			break;
+		case EQI_SHOES:
+			mes "�����~! ������觡Ѻ��١�����͹��ǧ��¢ͧ���, ������~.";
+			break;
+		case EQI_ACC_L:
+		case EQI_ACC_R:
+			mes "������? �˹�л�дѺ ?";
+			break;
+		case EQI_HEAD_MID:
+		case EQI_HEAD_LOW:
+			mes "������? �����ҡ�Ф������ǡѺ��ǡ��ǹ����, ������?~";
+			break;
+		}
+		close;
+	}
+	if (!getequipisenableref(.@part)) {
+		mes "[Holink]";
+		mes "����Ҩ���� Aragam �ҵա�պǡ�����, ������.";
+		close;
+	}
+	if (getequiprefinerycnt(.@part) >= 10) {
+		mes "[Holink]";
+		mes "������~ ��ҵպǡ�٧�ش����. �Ҩ���� Aragam ��������, ������?~";
+		close;
+	}
+	mes "[Holink]";
+	.@refineitemid = getequipid(.@part); // save id of the item
+	.@refinerycnt = getequiprefinerycnt(.@part); //save refinery count
+	setarray .@card[0], getequipcardid(.@part,0), getequipcardid(.@part,1), getequipcardid(.@part,2), getequipcardid(.@part,3);
+// Holink has different hardcoded prices
+//	.@price = getequiprefinecost(.@part, REFINE_COST_NORMAL, REFINE_ZENY_COST);
+	.@material = getequiprefinecost(.@part, REFINE_COST_NORMAL, REFINE_MATERIAL_ID);
+
+	switch(getequipweaponlv(.@part)) {
+	default:
+	case 0: // Armor
+		.@type$ = "armor";
+		.@price = 15000;
+		mes "You have chosen an armor, meow~";
+		break;
+	case 1: // Level 1 Weapon
+		.@type$ = "weapon";
+		.@price = 500;
+		mes "A level 1 weapon...?";
+		break;
+	case 2: // Level 2 Weapon
+		.@type$ = "weapon";
+		.@price = 2000;
+		mes "Meow, a level 2 weapon...?";
+		break;
+	case 3: // Level 3 Weapon
+		.@type$ = "weapon";
+		.@price = 20000;
+		mes "Meow Meow~~ A level 3 weapon~~";
+		break;
+	case 4: // Level 4 Weapon
+		.@type$ = "weapon";
+		.@price = 50000;
+		mes "Me-Meow!... A level 4 weapon...!";
+		mes "I've only seen it twice while";
+		mes "learning from Aragam... Me-Meow!!";
+		break;
+	}
+	mes "��ҵ�ͧ�� ^ff9999"+getitemname(.@material)+"^000000 ��� ^ff9999"+.@price+"^000000 Zeny �繤�Һ�ԡ��, ������~";
+	mes "�зӵ�����, ������?~";
+	next;
+	if(select("��!!:���!!") == 2) {
+		mes "[Holink]";
+		mes "�����!!";
+		mes "�������������㹵�Ǣͧ Holink ���, ������?~";
+		close;
+	}
+	if (getequippercentrefinery(.@part, REFINE_COST_ENRICHED) < 100) {
+		mes "[Holink]";
+		mes "Meow!!";
+		if (.@type$ == "armor")
+			mes "���й��١�պǡ�����¤�������, ������.";
+		else {
+			mes "�ѹ����. �ѹ����~";
+			mes "���ظ���١�պǡ�������ҡ, ������~";
+			next;
+			mes "[Holink]";
+		}
+		mes "�ѹ��ᵡ������Ҩзӵ��";
+		mes "�ͧ���������˹�����, ������.";
+		next;
+		mes "[Holink]";
+		mes "��� "+.@type$+" ���ᵡ, ��Ҩ��������ö";
+		mes "���ѹ���ա���, ������. ��駻Ѩ�غѹ... ���͹Ҥ�";
+		mes "^ff0000��������Ϳ��蹨����仴�����͹^000000.";
+		mes "����ѧ��ҡ�ӵ�����, ������~?";
+		next;
+		if(select("��, ��ҡ��!!:����ѹ仫�!!") == 2) {
+			mes "[Holink]";
+			mes "������! ���͡���, ������.";
+			mes "��!!";
+			mes "�������㨹ѡ������������ͽ���͢�� Holink, ������~";
+			close;
+		}
+	}
+	if (countitem(.@material) == 0 || Zeny < .@price) {
+		mes "[Holink]";
+		mes "����բͧ���ú.";
+		mes "��ҵ�ͧ�� ^ff9999"+getitemname(.@material)+"^000000 ��� ^ff9999"+.@price+"^000000 Zeny, ������~";
+		mes "�����ѹ��, ������~";
+		close;
+	}
+	delitem .@material,1;
+	set Zeny, Zeny-.@price;
+
+	// anti-hack
+	if (callfunc("F_IsEquipIDHack", .@part, .@refineitemid) || callfunc("F_IsEquipCardHack", .@part, .@card[0], .@card[1], .@card[2], .@card[3]) ||
+		callfunc("F_IsEquipRefineHack", .@part, .@refinerycnt)) {
+		mes "[Holink]";
+		emotion ET_FRET;
+		mes "���ѡ����...";
+		mes "��ҤԴ��Ң�������?!";
+		mes "����ͺ��Ѻ�ͧ�͹�����������! ����鹫�!";
+		close;
+	}
+
+	if (getequippercentrefinery(.@part, REFINE_COST_ENRICHED) > rand(100)) {
+		successrefitem .@part;
+		mes "[Holink]";
+		mes "��~ ��~ ������! �պǡʹء�ѧ���~";
+		next;
+		emotion ET_CHUP;
+		mes "[Holink]";
+		mes "�ʹ������!! �ʹ������, ������!!";
+		mes "��Ҥ���١�����ͧ Aragam~";
+		mes "Holink!!";
+		mes "�ѹ��蹢�ҡ���������, ������!!";
+		close;
+	}
+	failedrefitem .@part;
+	mes "[Holink]";
+	mes "���~ ������~ �����!!";
+	next;
+	switch(rand(1,5)) {
+		case 1: emotion ET_CRY; break;
+		case 2: emotion ET_PROFUSELY_SWEAT; break;
+		case 3: emotion ET_KEK; break;
+		case 4: emotion ET_SCRATCH; break;
+		case 5: emotion ET_BIGTHROB; break;
+	}
+	mes "[Holink]";
+	mes "������!! ��ҡ����~~!!!!";
+	mes "�����!! ��ҷӾ�Ҵ, ������!!";
+	next;
+	mes "[Holink]";
+	mes "......";
+	mes "......";
+	mes "������~ �ѹ~ ᵡ����, ������...";
+	next;
+	mes "[Holink]";
+	mes "������.... �Ҩ���� Aragam �º͡���,";
+	mes "�����¹���ҡ�����Դ��Ҵ...";
+	mes "���������, �����Դ��Ҵ㹤��駹����繤��������㹤���˹��.";
+	close;
+}
